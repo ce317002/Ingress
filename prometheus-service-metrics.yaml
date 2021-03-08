@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /metrics
+  name: prometheus-service-metrics-ingress
+  namespace: custom
+spec:
+  rules:
+  - host: prometheus-service-metrics.com
+    http:
+      paths:
+      - path: /service
+        backend:
+          serviceName: service
+          servicePort: 80
+  tls:
+  - hosts:
+    - prometheus-service-metrics.com
+    secretName: domaiin-cf-tls
