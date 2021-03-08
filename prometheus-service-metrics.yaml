@@ -11,11 +11,11 @@ spec:
   - host: prometheus-service-metrics.com
     http:
       paths:
-      - path: /service
+      - path: /service-metrics
         backend:
           serviceName: service
           servicePort: 80
   tls:
   - hosts:
     - prometheus-service-metrics.com
-    secretName: domaiin-cf-tls
+    secretName: domain-cf-tls
