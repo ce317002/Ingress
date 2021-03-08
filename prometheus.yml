@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s 
+
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'custom'
+    scrape_interval: 60s
+    scrape_timeout: 59s
+    scheme: https
+    static_configs:
+      - targets: ['prometheus-service-metrics.com']
+        labels:
+          job: "service-name"
+          alias: "service-name"
+          __metrics_path__: /service-metrics
